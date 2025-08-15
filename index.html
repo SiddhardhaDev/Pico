@@ -130,57 +130,111 @@
         </section>
 
         <!-- Medicine Assistant Roadmap Section -->
-        <section class="w-full max-w-4xl bg-white shadow-lg rounded-xl p-8 mb-10">
-            <h2 class="text-3xl font-bold text-gray-800 section-title">Medicine Assistant Roadmap</h2>
-            
-            <p class="mt-4 text-lg text-gray-700">Steps to enable Pico to recognize medicines and fetch them autonomously. Includes both design/hardware and coding phases.</p>
-            
-            <!-- Phase 1 -->
-            <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-                <h3 class="text-2xl font-semibold text-blue-700">Phase 1 – Design & Hardware Setup</h3>
-                <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                    <li>Design chassis for stability and space for robotic arm.</li>
-                    <li>Select motors and wheels for smooth indoor movement.</li>
-                    <li>Assemble robotic arm, add limit switches or sensors for safe gripping.</li>
-                    <li>Set a home docking location for charging and start/end positions.</li>
-                </ul>
-            </div>
+<section class="w-full max-w-4xl bg-white shadow-lg rounded-xl p-8 mb-10">
+  <h2 class="text-3xl font-bold text-gray-800 section-title">Pico Development Roadmap – Detailed Phases</h2>
 
-            <!-- Phase 2 -->
-            <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-                <h3 class="text-2xl font-semibold text-blue-700">Phase 2 – Coding & Vision</h3>
-                <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                    <li>Implement OCR for reading medicine labels using Tesseract or EasyOCR + Coral TPU.</li>
-                    <li>Create a medicine database with all known medicine names.</li>
-                    <li>Use object detection (YOLOv5 / MobileNet) to locate medicine boxes/bottles.</li>
-                    <li>Add lighting for consistent OCR accuracy.</li>
-                </ul>
-            </div>
+  <!-- Phase 1 – 3D Designing -->
+  <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+    <h3 class="text-2xl font-semibold text-blue-700">Phase 1 – 3D Designing</h3>
+    <p class="mt-2 text-gray-700">
+      In this phase, we model Pico in CAD software to ensure mechanical stability and proper component placement. Details include:
+    </p>
+    <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+      <li><strong>Wheels:</strong> Place two powered wheels at the back with sufficient diameter for smooth indoor mobility.</li>
+      <li><strong>Castor Wheel:</strong> One front castor for balance and steering flexibility.</li>
+      <li><strong>Battery:</strong> Central placement to lower center of gravity and avoid tipping during arm movement.</li>
+      <li><strong>Controller Board (Raspberry Pi & Motor Drivers):</strong> Positioned near battery for easy cabling and heat dissipation.</li>
+      <li><strong>Robotic Arm Mount:</strong> Fixed on top plate with support brackets; check arm reach and rotational clearance.</li>
+      <li><strong>Sensor Mounts:</strong> Camera at front, IR/ultrasonic sensors on sides, distance from edges to avoid blind spots.</li>
+      <li><strong>Arm Storage:</strong> Slot or cavity for arm when not in use to reduce robot footprint.</li>
+      <li><strong>Ventilation & Cable Channels:</strong> Ensure airflow and tidy wiring in CAD model.</li>
+      <li><strong>Simulation:</strong> Use CAD simulation tools to verify center of gravity, stability, and wheel torque requirements.</li>
+    </ul>
+  </div>
 
-            <!-- Phase 3 -->
-            <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-                <h3 class="text-2xl font-semibold text-blue-700">Phase 3 – Autonomous Fetching & Navigation</h3>
-                <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                    <li>Map key locations: medicine shelf, delivery point, table. (SLAM with ROS or OpenCV)</li>
-                    <li>Enable safe navigation with obstacle detection and avoidance.</li>
-                    <li>Implement task flow: Command → Search → Navigate → Grab → Deliver.</li>
-                    <li>Handle missing medicine: alert user via dashboard or voice.</li>
-                </ul>
-            </div>
+  <!-- Phase 2 – Building -->
+  <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+    <h3 class="text-2xl font-semibold text-blue-700">Phase 2 – Physical Assembly</h3>
+    <p class="mt-2 text-gray-700">
+      Construct Pico according to the 3D design. Steps:
+    </p>
+    <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+      <li>Print 3D chassis, arm brackets, and battery holders with strong PLA/ABS.</li>
+      <li>Install powered wheels and castor, verify alignment and rotation freedom.</li>
+      <li>Mount Raspberry Pi and motor drivers securely with screws/standoffs.</li>
+      <li>Place battery in central cavity; add Velcro or custom holder for stability.</li>
+      <li>Route wires: motor cables, sensors, cameras, power lines. Keep clear of moving parts.</li>
+      <li>Install robotic arm, connect motors/servos; test movement limits and repeatability.</li>
+      <li>Fix camera, IR, and ultrasonic sensors; calibrate range and angles.</li>
+      <li>Test rolling movement without load; adjust wheel positions if necessary.</li>
+      <li>Check arm reach and ability to grab objects on flat surfaces and shelves.</li>
+      <li>Final assembly: tighten all screws, secure loose wires, and check balance.</li>
+    </ul>
+  </div>
 
-            <!-- Phase 4 -->
-            <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-                <h3 class="text-2xl font-semibold text-blue-700">Phase 4 – Testing, Safety & Refinement</h3>
-                <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                    <li>Test arm gripping reliability, add retries for failures.</li>
-                    <li>Validate OCR results before grabbing medicine.</li>
-                    <li>Add voice feedback: "Fetching..." and "Delivered". (pyttsx3 / gTTS)</li>
-                    <li>Optional: Face recognition for personalized delivery (OpenCV + face_recognition).</li>
-                    <li>Optimize battery usage, mobility, and arm speed for efficiency.</li>
-                </ul>
-            </div>
+  <!-- Phase 3 – Basic Coding & Initialization -->
+  <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+    <h3 class="text-2xl font-semibold text-blue-700">Phase 3 – Basic Coding & System Initialization</h3>
+    <p class="mt-2 text-gray-700">
+      Software setup and initialization:
+    </p>
+    <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+      <li>Install OS on Pi and set up Python environment with necessary libraries (OpenCV, PySerial, TensorFlow Lite).</li>
+      <li>Write initialization scripts for motors, sensors, camera, and robotic arm.</li>
+      <li>Implement logging system to track movements, sensor readings, and errors.</li>
+      <li>Flowchart logic: Start → Initialize hardware → Run self-checks → Ready for commands.</li>
+      <li>First scripts: simple motor forward/back, arm up/down, sensor readouts.</li>
+      <li>Debugging: Check motor directions, verify sensor ranges, camera feed validation.</li>
+    </ul>
+  </div>
 
-        </section>
+  <!-- Phase 4 – Navigation & Mapping -->
+  <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+    <h3 class="text-2xl font-semibold text-blue-700">Phase 4 – Navigation & Mapping</h3>
+    <p class="mt-2 text-gray-700">
+      Enable Pico to navigate autonomously:
+    </p>
+    <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+      <li>Set up SLAM (Simultaneous Localization and Mapping) using ROS/OpenCV.</li>
+      <li>Create a digital map of indoor space with coordinates for shelves, tables, and docking station.</li>
+      <li>Write path-planning algorithms to avoid obstacles dynamically.</li>
+      <li>Flowchart logic: Receive command → Map path → Check for obstacles → Move → Update map.</li>
+      <li>Debugging: Test navigation around furniture, verify accuracy of localization, adjust sensor offsets.</li>
+    </ul>
+  </div>
+
+  <!-- Phase 5 – Object Recognition & OCR -->
+  <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+    <h3 class="text-2xl font-semibold text-blue-700">Phase 5 – Object Recognition & OCR</h3>
+    <p class="mt-2 text-gray-700">
+      Implement recognition of objects and medicine labels:
+    </p>
+    <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+      <li>Set up camera feed and preprocess images for lighting normalization.</li>
+      <li>Train or use pre-trained models (YOLOv5, MobileNet) to detect medicine boxes/bottles.</li>
+      <li>Implement OCR with Tesseract/EasyOCR to read medicine names from labels.</li>
+      <li>Flowchart: Capture image → Object detection → Crop detected object → OCR → Match with database → Confirm correct item.</li>
+      <li>Debugging: Test multiple medicine types, angles, lighting conditions, and label fonts.</li>
+    </ul>
+  </div>
+
+  <!-- Phase 6 – Task Execution & Feedback -->
+  <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+    <h3 class="text-2xl font-semibold text-blue-700">Phase 6 – Task Execution & User Feedback</h3>
+    <p class="mt-2 text-gray-700">
+      Final integration: Pico can receive commands and fetch objects:
+    </p>
+    <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+      <li>Implement task execution flow: Receive request → Navigate → Identify object → Grab → Deliver → Return to dock.</li>
+      <li>Add voice feedback using pyttsx3/gTTS: “Fetching medicine”, “Delivered successfully”.</li>
+      <li>Error handling: Retry grab if failed, alert if medicine missing.</li>
+      <li>Flowchart logic: Command → Check database → Navigate → Detect & OCR → Arm pick → Deliver → Update logs → Return home.</li>
+      <li>Debugging: Test full sequence, edge cases, multiple objects, battery depletion during task.</li>
+      <li>Code size: Each phase of coding (init, navigation, vision, arm control, task flow) can easily accumulate 500+ lines of Python code.</li>
+    </ul>
+  </div>
+</section>
+
 
         <!-- Footer Section -->
         <footer class="w-full max-w-4xl text-center text-gray-500 text-sm mt-10">
@@ -189,3 +243,4 @@
     </div>
 </body>
 </html>
+
