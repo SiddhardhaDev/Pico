@@ -1,344 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Pico — Full Parts Catalog</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    :root{
-      --bg:#071025;
-      --card:#0f1724;
-      --muted:#93c5fd;
-      --accent:#00e5ff;
-      --glass: rgba(255,255,255,0.03);
-    }
-    html,body{height:100%}
-    body{
-      font-family:'Inter',sans-serif;
-      background: linear-gradient(180deg,var(--bg) 0%, #071026 60%, #071231 100%);
-      color:#e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-    }
-    .neon {
-      text-shadow: 0 0 8px rgba(0,230,255,0.12), 0 0 20px rgba(0,230,255,0.06);
-    }
-    .glow {
-      box-shadow: 0 8px 30px rgba(0,230,255,0.06), inset 0 1px 0 rgba(255,255,255,0.02);
-      border: 1px solid rgba(0,230,255,0.08);
-      backdrop-filter: blur(6px);
-    }
-    /* card entrance */
-    .animate-up { transform: translateY(18px); opacity: 0; transition: all .6s cubic-bezier(.2,.9,.2,1); }
-    .animate-up.show { transform: translateY(0); opacity: 1; }
-
-    /* small helpers */
-    .price-tag { background: linear-gradient(90deg, rgba(0,229,255,0.08), rgba(59,130,246,0.06)); color:var(--accent); padding:6px 10px; border-radius:8px; font-weight:700; }
-    .badge { background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:999px; font-weight:600; color:#9fb8ff; font-size:.85rem; }
-    a.link-muted { color:#8fbfff; text-decoration:underline; text-underline-offset:3px; }
-    /* responsive grid */
-    .parts-grid { display:grid; grid-template-columns:repeat(1,1fr); gap:18px; }
-    @media(min-width:640px){ .parts-grid{ grid-template-columns:repeat(2,1fr);} }
-    @media(min-width:1100px){ .parts-grid{ grid-template-columns:repeat(3,1fr);} }
-    /* card image */
-    .card-image{ height:160px; object-fit:cover; width:100%; border-radius:10px; border:1px solid rgba(255,255,255,0.03); }
-    /* important total */
-    .total-box { background: linear-gradient(90deg, rgba(0,230,255,0.04), rgba(59,130,246,0.03)); border: 1px solid rgba(0,230,255,0.14); padding:18px; border-radius:12px; text-align:center; }
-    /* table fallback (hidden on large screens) */
-    .table-fallback { display:block; }
-    @media(min-width:1100px){ .table-fallback{ display:none } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pico - The Mobile Robot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #334155;
+            line-height: 1.6;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 50%;
+            height: 3px;
+            background-color: #3b82f6; /* Blue-500 */
+            border-radius: 9999px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0; /* Gray-200 */
+        }
+        th {
+            background-color: #f8fafc; /* Gray-50 */
+            font-weight: 600;
+            color: #475569; /* Gray-600 */
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
 </head>
-<body>
-  <div class="max-w-7xl mx-auto px-6 py-10">
-    <!-- header -->
-    <header class="mb-8 text-center">
-      <h1 class="text-4xl sm:text-6xl font-extrabold neon">Pico — Full Parts Catalog</h1>
-      <p class="mt-2 text-sm text-sky-200/80">All parts listed — images pulled from the web for easy browsing. No skips.</p>
-      <p class="mt-4"><span class="badge">Project</span> <span class="ml-2 badge">Robot — Indoor Assistant</span></p>
-    </header>
+<body class="antialiased">
+    <div class="min-h-screen flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8">
+        <!-- Header Section -->
+        <header class="w-full max-w-4xl bg-white shadow-lg rounded-xl p-6 mb-10 text-center">
+            <h1 class="text-5xl font-extrabold text-gray-900 mb-4">Pico</h1>
+            <p class="text-xl text-blue-600 font-semibold">Your Autonomous Indoor Assistant</p>
+        </header>
 
-    <!-- hero -->
-    <section class="glow rounded-xl p-6 mb-10" aria-label="Pico hero">
-      <div class="sm:flex sm:items-center sm:gap-6">
-        <div class="sm:w-1/3">
-          <img src="https://source.unsplash.com/featured/?robot,robotics" alt="Pico" class="card-image rounded-lg shadow-lg" />
-        </div>
-        <div class="mt-4 sm:mt-0 sm:flex-1">
-          <h2 class="text-2xl font-bold">Design summary</h2>
-          <p class="mt-2 text-slate-200/80">Pico is a small-form indoor assistant with an articulated arm and omnidirectional mobility. Below is the complete parts list — quantity, purpose, recommended model or alternatives, and the estimated price you provided.</p>
-          <div class="mt-4 flex flex-wrap gap-3">
-            <a class="badge" href="#parts">View Parts</a>
-            <a class="badge" href="https://github.com/SiddhardhaDev/Pico" target="_blank" rel="noopener">GitHub Repo</a>
-            <span class="price-tag ml-auto">Estimated total: ₹19,992</span>
-          </div>
-        </div>
-      </div>
-    </section>
+        <!-- Hero Section with Image and Description -->
+        <section class="w-full max-w-4xl bg-white shadow-lg rounded-xl p-8 mb-10 flex flex-col md:flex-row items-center justify-center">
+            <div class="md:w-1/2 flex justify-center mb-6 md:mb-0">
+                <!-- Image of the Pico Robot with Arm and Wheels -->
+                <img src="https://raw.githubusercontent.com/SiddhardhaDev/Pico/main/ChatGPT%20Image%20Jun%204%2C%202025%2C%2007_09_55%20PM.png" alt="Pico Robot with Arm and Wheels" class="rounded-lg shadow-md max-w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x400/FF0000/FFFFFF?text=Image+Not+Available';">
+            </div>
+            <div class="md:w-1/2 md:pl-8 text-center md:text-left">
+                <h2 class="text-3xl font-bold text-gray-800 section-title">Meet Pico</h2>
+                <p class="mt-4 text-lg text-gray-700">Pico is a state-of-the-art mobile robot designed to seamlessly integrate into your indoor environment. Equipped with a versatile robotic arm and omnidirectional wheels, Pico is engineered for precision, adaptability, and intelligent operation.</p>
+            </div>
+        </section>
 
-    <!-- parts grid -->
-    <main id="parts" class="mb-10">
-      <h3 class="text-xl font-bold text-sky-200 mb-4">Core Components — click any card for notes</h3>
+        <!-- Key Features Section -->
+        <section class="w-full max-w-4xl bg-white shadow-lg rounded-xl p-8 mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 section-title">Key Features & Abilities</h2>
+            <ul class="mt-6 space-y-4 text-lg text-gray-700 list-disc list-inside">
+                <li><strong class="text-blue-600">Advanced Robotic Arm:</strong> 6-axis robotic arm with high precision for intricate tasks, capable of lifting up to 2 kg.</li>
+                <li><strong class="text-blue-600">Omnidirectional Mobility:</strong> Four Mecanum wheels for 360-degree movement, enabling navigation in tight spaces.</li>
+                <li><strong class="text-blue-600">AI-Powered Navigation:</strong> Cameras for accurate mapping, obstacle avoidance, and autonomous path planning.</li>
+                <li><strong class="text-blue-600">Voice & Gesture Control:</strong> Intuitive control options for easy interaction and task assignment.</li>
+                <li><strong class="text-blue-600">Modular Design:</strong> Expandable ports for additional sensors or tools, allowing for future upgrades and customization.</li>
+                <li><strong class="text-blue-600">Long-lasting Battery:</strong> Up to 3 hours of continuous operation on a single charge, with quick-charge capabilities.</li>
+                <li><strong class="text-blue-600">Object Recognition:</strong> Integrated computer vision for identifying and interacting with various objects.</li>
+            </ul>
+        </section>
 
-      <div id="grid" class="parts-grid">
-        <!-- Card template: we'll include one card per part (all parts you listed) -->
+        <!-- Components / Parts Used Section with Material Costs -->
+        <section class="w-full max-w-4xl bg-white shadow-lg rounded-xl p-8 mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 section-title">Core Components & Estimated Material Costs</h2>
+            <div class="mt-6 overflow-x-auto rounded-lg shadow-md">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Component</th>
+                            <th class="px-4 py-2">Description / Notes</th>
+                            <th class="px-4 py-2 text-right">Qty</th>
+                            <th class="px-4 py-2 text-right">Unit Price (₹)</th>
+                            <th class="px-4 py-2 text-right">Total (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Raspberry Pi 5 (8GB)</td>
+                            <td class="px-4 py-2">Main processor with M.2 support</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹7,500</td>
+                            <td class="px-4 py-2 text-right">₹7,500</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Coral M.2 TPU</td>
+                            <td class="px-4 py-2">AI acceleration for object & text recognition</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹5,000</td>
+                            <td class="px-4 py-2 text-right">₹5,000</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">256GB M.2 NVMe SSD</td>
+                            <td class="px-4 py-2">Local storage for database, models</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹2,800</td>
+                            <td class="px-4 py-2 text-right">₹2,800</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">BO Motors (9V 300RPM)</td>
+                            <td class="px-4 py-2">4 for wheels, 4 for string-controlled arm</td>
+                            <td class="px-4 py-2 text-right">8</td>
+                            <td class="px-4 py-2 text-right">₹42.75</td>
+                            <td class="px-4 py-2 text-right">₹342</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Motor Driver Modules (L298N)</td>
+                            <td class="px-4 py-2">Controls 4 motors each</td>
+                            <td class="px-4 py-2 text-right">2</td>
+                            <td class="px-4 py-2 text-right">₹150</td>
+                            <td class="px-4 py-2 text-right">₹300</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Pi Camera Module V2 (8MP)</td>
+                            <td class="px-4 py-2">For vision (can read labels with OCR)</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹1,500</td>
+                            <td class="px-4 py-2 text-right">₹1,500</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Wheels (65mm)</td>
+                            <td class="px-4 py-2">For mobility</td>
+                            <td class="px-4 py-2 text-right">4</td>
+                            <td class="px-4 py-2 text-right">₹50</td>
+                            <td class="px-4 py-2 text-right">₹200</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Chassis + Arm Frame (3D/Custom)</td>
+                            <td class="px-4 py-2">Lightweight custom frame</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹1,000</td>
+                            <td class="px-4 py-2 text-right">₹1,000</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Li-ion Battery Pack (12V/5V out)</td>
+                            <td class="px-4 py-2">Powers motors + Pi separately</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹800</td>
+                            <td class="px-4 py-2 text-right">₹800</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Buck Converter / Step-down</td>
+                            <td class="px-4 py-2">Regulates voltage as needed</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹150</td>
+                            <td class="px-4 py-2 text-right">₹150</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Jumper wires, terminals, etc.</td>
+                            <td class="px-4 py-2">Cables, headers, connectors</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹300</td>
+                            <td class="px-4 py-2 text-right">₹300</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Strong Nylon String/Cable</td>
+                            <td class="px-4 py-2">For string-pulley arm mechanism</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹100</td>
+                            <td class="px-4 py-2 text-right">₹100</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Breadboard or Mounting PCB</td>
+                            <td class="px-4 py-2">Optional but helps wiring</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹100</td>
+                            <td class="px-4 py-2 text-right">₹100</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">Micro SD Card (32GB) (boot only)</td>
+                            <td class="px-4 py-2">Boots OS before handing off to SSD</td>
+                            <td class="px-4 py-2 text-right">1</td>
+                            <td class="px-4 py-2 text-right">₹400</td>
+                            <td class="px-4 py-2 text-right">₹400</td>
+                        </tr>
+                        <tr class="font-bold text-blue-700">
+                            <td class="px-4 py-2">Total Estimated Material Cost</td>
+                            <td class="px-4 py-2"></td>
+                            <td class="px-4 py-2 text-right"></td>
+                            <td class="px-4 py-2 text-right"></td>
+                            <td class="px-4 py-2 text-right">₹19,992</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-        <!-- 1 Raspberry Pi 5 (8GB) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?raspberry-pi" alt="Raspberry Pi 5">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Raspberry Pi 5 (8GB)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Main processor with M.2 support — recommended as the primary compute board for Pico.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹7,500</span></p>
-            <p class="mt-2 text-xs text-slate-300">Notes: Use for robot OS, sensor fusion, and coordination. (Alternative: Raspberry Pi Compute Module or Raspberry Pi Pico for microcontroller tasks).</p>
-          </div>
-        </article>
-
-        <!-- 2 Raspberry Pi Pico (optional microcontroller) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?microcontroller,pcb" alt="Raspberry Pi Pico">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Raspberry Pi Pico (Optional)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Simple microcontroller for low-latency motor control or sensors (optional, not a replacement for Pi 5).</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">(varies)</span></p>
-          </div>
-        </article>
-
-        <!-- 3 Coral M.2 TPU -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?edge-tpu,ai" alt="Coral M.2 TPU">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Coral M.2 Accelerator (Edge TPU)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">AI acceleration for object detection, OCR and fast inference on-device.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹5,000</span></p>
-            <p class="mt-2 text-xs text-slate-300">Notes: M.2 E-key module; plug into Pi or compatible board (if M.2 slot available).</p>
-          </div>
-        </article>
-
-        <!-- 4 256GB M.2 NVMe SSD -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?nvme,ssd" alt="256GB NVMe SSD">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">256GB M.2 NVMe SSD</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Local storage for models, logs, and databases. Boots fast, store models offline.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹2,800</span></p>
-          </div>
-        </article>
-
-        <!-- 5 BO Motors / DC Gear Motors -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?dc-motor,gear-motor" alt="DC Gear Motor">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">BO Motors (9V / 6V DC Gear Motors)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Motors for wheels and string-pulley arm. You listed 8 motors (4 for wheels, 4 for arm/pulley).</p>
-            <p class="mt-2"><strong>Qty:</strong> 8 <span class="ml-3 price-tag">₹42.75 each → ₹342 total</span></p>
-          </div>
-        </article>
-
-        <!-- 6 Motor Driver Modules (L298N or TB6612FNG) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?motor-driver,arduino" alt="Motor Driver L298N">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Motor Driver Modules (L298N)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Drives motors; you can use L298N modules (2) or TB6612FNG for better efficiency and lower heat.</p>
-            <p class="mt-2"><strong>Qty:</strong> 2 <span class="ml-3 price-tag">₹150 each → ₹300</span></p>
-          </div>
-        </article>
-
-        <!-- 7 Pi Camera Module V2 -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?camera,module,raspberry-pi-camera" alt="Pi Camera Module">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Pi Camera Module V2 (8MP)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Vision for object detection / OCR / mapping.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹1,500</span></p>
-          </div>
-        </article>
-
-        <!-- 8 Wheels (65mm) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?wheel,robot-wheel" alt="Wheels 65mm">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Wheels (65mm)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Standard wheels for mobility; if you want omnidirectional movement, use Mecanum wheels (separate card below).</p>
-            <p class="mt-2"><strong>Qty:</strong> 4 <span class="ml-3 price-tag">₹50 each → ₹200</span></p>
-          </div>
-        </article>
-
-        <!-- 9 Mecanum wheels (optional for omni movement) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?mecanum,wheel" alt="Mecanum Wheel">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Mecanum Wheels (65mm) — OPTIONAL</h4>
-            <p class="text-sm text-slate-200/80 mt-1">If you want true omnidirectional movement, replace standard wheels with 4× Mecanum wheels.</p>
-            <p class="mt-2"><strong>Qty:</strong> 4 <span class="ml-3 price-tag">(varies)</span></p>
-          </div>
-        </article>
-
-        <!-- 10 Chassis + Arm Frame (3D/Custom) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?3d-print,chassis" alt="Chassis and 3D printed arm">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Chassis + Arm Frame (3D printed / custom)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Lightweight frame to mount motors, electronics, and arm mechanism.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹1,000</span></p>
-          </div>
-        </article>
-
-        <!-- 11 Li-ion Battery Pack (12V / 5V out) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?battery,li-ion" alt="Li-ion battery pack">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Li-ion Battery Pack (12V w/ 5V output)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Primary power source for motors and Raspberry Pi (separate regulated output recommended).</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹800</span></p>
-          </div>
-        </article>
-
-        <!-- 12 Buck converter / step-down -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?voltage-regulator,dc-dc" alt="buck converter">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Buck Converter / Step-Down Module</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Regulates battery voltage to safe 5V or 3.3V rails for controllers and sensors.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹150</span></p>
-          </div>
-        </article>
-
-        <!-- 13 Jumper wires, terminals, connectors -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?jumper-wires,cables" alt="Jumper wires">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Jumper Wires, Terminals & Connectors</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Wiring kit for connecting sensors, drivers, and power lines.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 kit <span class="ml-3 price-tag">₹300</span></p>
-          </div>
-        </article>
-
-        <!-- 14 Strong Nylon String/Cable (arm pulleys) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?nylon-string,cable" alt="Nylon string">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Strong Nylon String / Cable</h4>
-            <p class="text-sm text-slate-200/80 mt-1">String for pulley-driven arm mechanisms or cable routing.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹100</span></p>
-          </div>
-        </article>
-
-        <!-- 15 Breadboard or Mounting PCB -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?breadboard,electronics" alt="Breadboard">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Breadboard / Mounting PCB</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Prototyping board for wiring and mounting controllers and sensors.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹100</span></p>
-          </div>
-        </article>
-
-        <!-- 16 Micro SD Card (32GB) (boot only) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?micro-sd,sdcard" alt="Micro SD Card 32GB">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Micro SD Card (32GB)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Boot medium for Raspberry Pi before handing off to the NVMe SSD.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">₹400</span></p>
-          </div>
-        </article>
-
-        <!-- 17 Pi Microphone / USB mic -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?microphone,usb-mic" alt="Microphone">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Microphone (Electret / USB)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">For voice commands and audio capture.</p>
-            <p class="mt-2"><strong>Qty:</strong> 1 <span class="ml-3 price-tag">(varies)</span></p>
-          </div>
-        </article>
-
-        <!-- 18 Caster wheel -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?caster-wheel" alt="Caster wheel">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Swivel Caster Wheel</h4>
-            <p class="text-sm text-slate-200/80 mt-1">A single caster for balance (if using differential/wheel drivetrain).</p>
-            <p class="mt-2"><strong>Qty:</strong> 1</p>
-          </div>
-        </article>
-
-        <!-- 19 Nuts, bolts, spacers, mounts -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?bolts,nuts" alt="Nuts and bolts">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Nuts, Bolts, Spacers & Mounts</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Mechanical fasteners and mounting hardware for assembly.</p>
-            <p class="mt-2"><strong>Qty:</strong> Assorted</p>
-          </div>
-        </article>
-
-        <!-- 20 Misc tools (soldering, heat-shrink etc.) -->
-        <article class="glow rounded-xl p-4 animate-up" tabindex="0">
-          <img class="card-image" src="https://source.unsplash.com/featured/?soldering,soldering-iron" alt="Soldering tools">
-          <div class="mt-3">
-            <h4 class="font-semibold text-lg">Tools / Misc (Soldering, Heat-shrink)</h4>
-            <p class="text-sm text-slate-200/80 mt-1">Essential tools for wiring and assembly: soldering iron, shrink tubing, screwdrivers.</p>
-            <p class="mt-2"><strong>Qty:</strong> As required</p>
-          </div>
-        </article>
-      </div>
-
-      <!-- Total -->
-      <div class="mt-8 total-box">
-        <div class="text-sm text-slate-300">Total Estimated Material Cost</div>
-        <div class="text-4xl font-bold mt-2" style="color:var(--accent)">₹19,992</div>
-        <div class="text-xs text-slate-300 mt-1">(Sum of parts from your list)</div>
-      </div>
-
-      <!-- mobile fallback simple table -->
-      <div class="mt-6 table-fallback text-sm text-slate-300">
-        <details class="mt-3 bg-transparent p-3 rounded-md border border-white/6">
-          <summary class="font-semibold">Show raw parts table (mobile friendly)</summary>
-          <pre class="mt-2 text-xs overflow-auto" style="white-space:pre-wrap">
-Raspberry Pi 5 (8GB) — 1 — ₹7,500
-Coral M.2 TPU — 1 — ₹5,000
-256GB M.2 NVMe SSD — 1 — ₹2,800
-BO Motors (9V 300RPM) — 8 — ₹42.75 each → ₹342
-Motor Driver Modules (L298N) — 2 — ₹150 each → ₹300
-Pi Camera Module V2 — 1 — ₹1,500
-Wheels (65mm) — 4 — ₹50 each → ₹200
-Chassis + Arm Frame — 1 — ₹1,000
-Li-ion Battery Pack — 1 — ₹800
-Buck Converter — 1 — ₹150
-Jumper wires, terminals — 1 kit — ₹300
-Nylon String/Cable — 1 — ₹100
-Breadboard / Mounting PCB — 1 — ₹100
-Micro SD Card (32GB) — 1 — ₹400
-Misc nuts/bolts/tools — assorted
-          </pre>
-        </details>
-      </div>
-    </main>
-
-    <!-- footer / credits -->
-    <footer class="mt-12 text-center text-slate-400 text-sm">
-      Images auto-sourced (Unsplash) for quick visual reference. Official product references checked: Raspberry Pi, Coral Edge TPU, Raspberry Pi Camera, Mecanum wheels, and common motor driver docs (links below).<br>
-      &copy; 2025 Pico Robotics • <a class="link-muted" href="https://github.com/SiddhardhaDev/Pico" target="_blank" rel="noopener">GitHub</a>
-    </footer>
-  </div>
-
-  <script>
-    // simple intersection to animate cards as they enter viewport
-    document.addEventListener('DOMContentLoaded', () => {
-      const items = Array.from(document.querySelectorAll('.animate-up'));
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('show') }
-        });
-      }, {threshold: 0.12});
-      items.forEach(it => obs.observe(it));
-    });
-  </script>
+        <!-- Footer Section -->
+        <footer class="w-full max-w-4xl text-center text-gray-500 text-sm mt-10">
+            &copy; 2025 Pico Robotics. All rights reserved.
+        </footer>
+    </div>
 </body>
 </html>
