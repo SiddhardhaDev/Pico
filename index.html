@@ -133,51 +133,53 @@
         <section class="w-full max-w-4xl bg-white shadow-lg rounded-xl p-8 mb-10">
             <h2 class="text-3xl font-bold text-gray-800 section-title">Medicine Assistant Roadmap</h2>
             
-            <p class="mt-4 text-lg text-gray-700">Steps to enable Pico to recognize medicines and fetch them autonomously, with suggested tools and code hints.</p>
+            <p class="mt-4 text-lg text-gray-700">Steps to enable Pico to recognize medicines and fetch them autonomously. Includes both design/hardware and coding phases.</p>
             
             <!-- Phase 1 -->
             <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-                <h3 class="text-2xl font-semibold text-blue-700">Phase 1 – Core Movement & Arm Precision</h3>
+                <h3 class="text-2xl font-semibold text-blue-700">Phase 1 – Design & Hardware Setup</h3>
                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                    <li>Calibrate wheels for precise movement. <span class="font-mono bg-gray-200 px-1 rounded">Python + GPIO / motor library</span></li>
-                    <li>Tune robotic arm to safely handle medicine boxes. <span class="font-mono bg-gray-200 px-1 rounded">Python + PWM / Servo control</span></li>
-                    <li>Add limit switches or current sensors for safe grip. <span class="font-mono bg-gray-200 px-1 rounded">GPIO input / Python</span></li>
-                    <li>Set a "home" docking position for start/end.</li>
+                    <li>Design chassis for stability and space for robotic arm.</li>
+                    <li>Select motors and wheels for smooth indoor movement.</li>
+                    <li>Assemble robotic arm, add limit switches or sensors for safe gripping.</li>
+                    <li>Set a home docking location for charging and start/end positions.</li>
                 </ul>
             </div>
 
             <!-- Phase 2 -->
             <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-                <h3 class="text-2xl font-semibold text-blue-700">Phase 2 – Vision for Medicine Recognition</h3>
+                <h3 class="text-2xl font-semibold text-blue-700">Phase 2 – Coding & Vision</h3>
                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                    <li>Use OCR to read medicine names. <span class="font-mono bg-gray-200 px-1 rounded">Tesseract or EasyOCR + Coral TPU</span></li>
-                    <li>Create a medicine database with aliases for recognition.</li>
+                    <li>Implement OCR for reading medicine labels using Tesseract or EasyOCR + Coral TPU.</li>
+                    <li>Create a medicine database with all known medicine names.</li>
                     <li>Use object detection (YOLOv5 / MobileNet) to locate medicine boxes/bottles.</li>
-                    <li>Add a LED ring for consistent lighting and better OCR accuracy.</li>
+                    <li>Add lighting for consistent OCR accuracy.</li>
                 </ul>
             </div>
 
             <!-- Phase 3 -->
             <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-                <h3 class="text-2xl font-semibold text-blue-700">Phase 3 – Autonomous Fetching Logic</h3>
+                <h3 class="text-2xl font-semibold text-blue-700">Phase 3 – Autonomous Fetching & Navigation</h3>
                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                    <li>Map key locations: medicine shelf, delivery point, table. <span class="font-mono bg-gray-200 px-1 rounded">SLAM libraries like RTAB-Map or OpenCV + ROS</span></li>
-                    <li>Navigate safely with obstacle avoidance. <span class="font-mono bg-gray-200 px-1 rounded">Python + ROS or custom navigation code</span></li>
-                    <li>Task flow: Command → Search → Navigate → Grab → Deliver.</li>
-                    <li>Handle missing medicine: notify user via voice or dashboard.</li>
+                    <li>Map key locations: medicine shelf, delivery point, table. (SLAM with ROS or OpenCV)</li>
+                    <li>Enable safe navigation with obstacle detection and avoidance.</li>
+                    <li>Implement task flow: Command → Search → Navigate → Grab → Deliver.</li>
+                    <li>Handle missing medicine: alert user via dashboard or voice.</li>
                 </ul>
             </div>
 
             <!-- Phase 4 -->
             <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-                <h3 class="text-2xl font-semibold text-blue-700">Phase 4 – Safety, Reliability, and Refinement</h3>
+                <h3 class="text-2xl font-semibold text-blue-700">Phase 4 – Testing, Safety & Refinement</h3>
                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                    <li>Retry gripping if arm fails; alert if repeated failure.</li>
-                    <li>Confirm OCR reads before grabbing the medicine.</li>
-                    <li>Provide voice feedback: "Fetching..." and "Delivered". <span class="font-mono bg-gray-200 px-1 rounded">Python + pyttsx3 / gTTS</span></li>
-                    <li>Optional: Face recognition to deliver medicine to a specific person. <span class="font-mono bg-gray-200 px-1 rounded">OpenCV + face_recognition library</span></li>
+                    <li>Test arm gripping reliability, add retries for failures.</li>
+                    <li>Validate OCR results before grabbing medicine.</li>
+                    <li>Add voice feedback: "Fetching..." and "Delivered". (pyttsx3 / gTTS)</li>
+                    <li>Optional: Face recognition for personalized delivery (OpenCV + face_recognition).</li>
+                    <li>Optimize battery usage, mobility, and arm speed for efficiency.</li>
                 </ul>
             </div>
+
         </section>
 
         <!-- Footer Section -->
